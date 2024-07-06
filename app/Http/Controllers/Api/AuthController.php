@@ -9,10 +9,8 @@ use Illuminate\Support\Facades\Validator;
 
 class AuthController extends Controller
 {
-
     public function register(Request $request)
     {
-
         $error_message = [
         'name.required'=>'Name is required',
         'name.max' => 'Name cannot be more than 50 characters',
@@ -44,14 +42,6 @@ class AuthController extends Controller
                 'password'=>bcrypt($request->name),
             ]);
             $user->save();
-        }
-
-        $user_register = User::create($credentials);
-        if(!$user_register){
-            return response()->json([
-                'status'=> 403,
-                'message'=> 'Validation error, Please try again.'
-            ], 200);
         }
 
         return response()->json([
